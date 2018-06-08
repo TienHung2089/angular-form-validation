@@ -1,0 +1,44 @@
+<div class="container">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(confirmPasswordInput)">
+    
+    <!--USER NAME-->
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" class="form-control" minlength="3" maxlength="10" required 
+        [(ngModel)]="userName" #userNameInput="ngModel">
+    </div>
+
+    <!--USER NAME VALIDATION MSG-->
+    <div *ngIf="userNameInput.touched && userNameInput.invalid" class="alert alert-danger">
+      <div *ngIf="userNameInput.errors.required">Username is required</div>
+      <div *ngIf="userNameInput.errors.minlength">Username must be at least {{userNameInput.errors.minlength.requiredLength}} characters</div>
+      <div *ngIf="userNameInput.errors.maxlength">Username must not be more than {{userNameInput.errors.maxlength.requiredLength}} characters</div>
+    </div>
+
+    <!--PASSWORD-->
+    <div>
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" class="form-control" required 
+      #passwordInput="ngModel" [(ngModel)]="password">
+    </div>
+
+    <!--PASSWORD VALIDATION MSG-->
+      <div *ngIf="passwordInput.touched && !passwordInput.valid" class="alert alert-danger">
+        Password is required
+      </div>
+    <!--diagnostic-->
+    {{passwordInput.value}}
+
+    <!--CONFIRM PASSWORD-->
+    <div>
+      <label for="confirmpassword">Confirm Password</label>
+      <input type="text" id="confirmpassword" name="confirmpassword" class="form-control" 
+      ngModel #confirmPassword="ngModel" [appPasswordMatching]="password">
+    </div>
+
+    <!--CONFIRM PASSWORD VALIDATION MSG-->
+    <div *ngIf="password && !confirmPassword.errors.isPasswordMatched">Password does not match</div>
+
+    <button type="submit" class="form-control btn btn-primary">Register</button>
+  </form>
+</div>

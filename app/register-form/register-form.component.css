@@ -1,0 +1,15 @@
+.container {
+    width: 70%;
+}
+
+.ng-valid[required] {
+    border-left: 5px solid green;
+}
+
+.ng-invalid[required] {
+    border-left: 5px solid #a94442;
+}
+
+.ng-pristine[required] {
+    border-left: 5px solid green;
+}
